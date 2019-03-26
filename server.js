@@ -37,11 +37,13 @@ var server = http.createServer(function(request, response){
         response.setHeader('Content-Type', 'application/javascript')
         response.write(string)
         response.end()
-  }else if (path === '/pay' && method.toUpperCase() === 'POST'){
+  }else if (path === '/pay' ){
       var amount = fs.readFileSync('./db','utf8') // 100
       var newAmount = amount - 1
       fs.writeFileSync('./db',newAmount)
-      response.write('success')
+      response.setHeader('Content-Type','image/png')
+      response.statusCode = 200
+      response.write(fs.readFileSync('./dog.png'))
       response.end()
   } else{
     response.statusCode = 404
