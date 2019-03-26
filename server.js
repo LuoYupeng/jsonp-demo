@@ -44,7 +44,9 @@ var server = http.createServer(function(request, response){
       response.setHeader('Content-Type','application/javascript')
       response.statusCode = 200
       response.write(`
-                      amount.innerText = amount.innerText - 1`)
+                      ${query.callback}.call(undefined,'success')
+                      `)
+      //${query.callbackName}获取传参  把success用json表示时就是JSONP
       response.end()
   } else{
     response.statusCode = 404
